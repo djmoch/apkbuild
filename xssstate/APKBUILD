@@ -1,0 +1,36 @@
+# Contributor: Daniel Moch <daniel@danielmoch.com>
+# Maintainer: Daniel Moch <daniel@danielmoch.com>
+pkgname=xssstate
+pkgver=1.1
+pkgrel=0
+pkgdesc="A simple tool to retrieve the X screensaver state"
+url="https://tools.suckless.org/x/xssstate"
+arch="all"
+license="MIT/X"
+depends=""
+makedepends="libx11-dev libxscrnsaver-dev"
+subpackages="$pkgname-doc"
+options="!check" # no test suite
+source="https://dl.suckless.org/tools/xssstate-$pkgver.tar.gz"
+builddir="$srcdir/xssstate-$pkgver"
+
+prepare() {
+	default_prepare
+	sed 's~/usr/local~/usr~g' "$builddir/config.mk"
+}
+
+build() {
+	make
+}
+
+check() {
+	make check
+}
+
+package() {
+	make PREFIX=/usr DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+96c59e9cc7b78aec8a95040cd1c4c6aaeb85f092c5a52cf64a62ceeb3fed65bdd3eb6f070b3d66ae8ec2544371a236f32e83e0a5c45e6d21f2bf7791b5c0d519  xssstate-1.1.tar.gz
+"

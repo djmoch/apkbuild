@@ -1,0 +1,5 @@
+#!/bin/sh
+if type udevadm >/dev/null 2>&1
+then
+	udevadm control --reload-rules
+fi

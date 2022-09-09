@@ -1,0 +1,33 @@
+# Contributor: Daniel Moch <daniel@danielmoch.com>
+# Maintainer: Daniel Moch <daniel@danielmoch.com>
+pkgname=autorandr
+pkgver=1.12.1
+pkgrel=0
+pkgdesc="Auto-detect connected display hardware and load appropiate X11 setup using xrandr"
+url="https://github.com/phillipberndt/autorandr"
+arch="all"
+license="GPL-3.0-or-later"
+depends="py3-packaging xdpyinfo xrandr"
+makedepends="bash-completion"
+install="$pkgname.post-install $pkgname.post-deinstall"
+subpackages="$pkgname-doc $pkgname-bash-completion $pkgname-zsh-completion"
+source="$pkgname-$pkgver.tar.gz::https://github.com/phillipberndt/autorandr/archive/refs/tags/$pkgver.tar.gz"
+builddir="$srcdir/"
+options="!check" # upsteam contains no test suite
+
+build() {
+	# Replace with proper build command(s)
+	:
+}
+
+package() {
+	# Replace with proper package command(s)
+	targets="autorandr pmutils bash_completion autostart_config manpage udev"
+	make install TARGETS="$targets" UDEV_RULES_DIR=/etc/udev/rules.d PM_SLEEPHOOKS_DIR=/etc/pm/sleep.d DESTDIR="$pkgdir" PREFIX=/usr install -C $pkgname-$pkgver
+	install -vDm 644 $pkgname-$pkgver/contrib/zsh_completion/_$pkgname -t "$pkgdir/usr/share/zsh/site-functions/"
+	install -vDm 644 $pkgname-$pkgver/README.md -t "$pkgdir/usr/share/doc/$pkgname/"
+}
+
+sha512sums="
+a7e095eb96e7e0d3a5b3b2122d68a3d3a5121d8be7a86ddd9f837ad42b7a53ed5ee45151f23861c5b900e214a4dfc0c575f45fe70c8c5587562a4035458137a0  autorandr-1.12.1.tar.gz
+"

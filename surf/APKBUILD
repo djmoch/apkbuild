@@ -1,0 +1,36 @@
+# Contributor: Daniel Moch <daniel@danielmoch.com>
+# Maintainer: Daniel Moch <daniel@danielmoch.com>
+pkgname=surf
+pkgver=2.1
+pkgrel=0
+pkgdesc="A simple web browser based on WebKit2/GTK+"
+url="https://surf.suckless.org/"
+arch="all"
+license="MIT/X"
+depends="xprop dmenu"
+makedepends="webkit2gtk-dev glib-dev gcr-dev curl ffmpeg"
+subpackages="$pkgname-doc"
+options="!check" # no test suite
+source="https://dl.suckless.org/surf/surf-$pkgver.tar.gz
+	config.h
+	"
+
+prepare() {
+	default_prepare
+	cp "$srcdir/config.h" "$builddir/"
+	sed -i 's~/usr/local~/usr~g' "$builddir/config.mk"
+}
+
+
+build() {
+	make
+}
+
+package() {
+	make PREFIX=/usr DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+06f31f683a941d9a587d908ae7f6949255937b0b0c9c133a18c6fa753c7da75de267adda1c83dd9ba0a8535e2b6d4ff2b5408cc5e8a2e315d4198fe68df5db12  surf-2.1.tar.gz
+06b0d9613bc4063afe18729a2a233f5be7dac31de17c6162545f082102d1fcf9936feab1cbef7805e02fcbc5ae6bee19f56ce83e7505f7d16279758bd297b819  config.h
+"
