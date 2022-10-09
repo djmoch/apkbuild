@@ -1,0 +1,31 @@
+# Contributor: Daniel Moch <daniel@danielmoch.com>
+# Maintainer: Daniel Moch <daniel@danielmoch.com>
+pkgname=dag
+pkgver=0.1.0
+pkgrel=0
+pkgdesc="Djmoch's Auto Generator"
+url="https://git.danielmoch.com/dag"
+arch="all"
+license="ISC"
+makedepends="byacc flex-dev fts-dev"
+subpackages="$pkgname-doc"
+source="https://dl.danielmoch.com/dag/dag-$pkgver.tar.gz"
+builddir="$srcdir/dag-$pkgver"
+options="!check" # test suite broken
+
+prepare() {
+	sed -i 's/-ll/-lfl -lfts/' "$builddir"/config.mk
+	sed -i 's~/usr/local~/usr~' "$builddir"/config.mk
+}
+
+build() {
+	make
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="
+1130540e06aaff1d1dbe8a98de5a041af320d3fb34db157862ca2390943471c231732559025dcd7d204ccbaa23db724b7507141ae3da6645f01adfc0d4030c9f  dag-0.1.0.tar.gz
+"
