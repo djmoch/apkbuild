@@ -1,0 +1,31 @@
+# Contributor: Daniel Moch <daniel@danielmoch.com>
+# Maintainer: Daniel Moch <daniel@danielmoch.com>
+pkgname=backup
+pkgver=1.0.0
+pkgrel=0
+pkgdesc="A simple backup utility"
+url="https://git.danielmoch.com/backup/about"
+arch="all"
+license="ISC"
+depends="borgbackup"
+makedepends=""
+subpackages="$pkgname-doc"
+source="https://dl.danielmoch.com/backup/backup-$pkgver.tar.gz"
+options="!check" # no test suite
+
+prepare() {
+	sed -i 's~/usr/local~/usr~g' Makefile
+}
+
+build() {
+	:
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+	install -Dm644 LICENSE $pkgdir/usr/share/licenses/backup
+}
+
+sha512sums="
+bf661f787d6bbba20defca2313e7cf15ca3b8321bd31c10d8ba47ff9f4e4d87a65ad863910fd4e64c4ef68de51e6188613e90ed7e6a0bc50e35f6afe98e01222  backup-1.0.0.tar.gz
+"
