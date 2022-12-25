@@ -2,7 +2,7 @@
 # Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
 # Maintainer: Daniel Moch <daniel@danielmoch.com>
 pkgname=dwm
-pkgver=6.3
+pkgver=6.4
 pkgrel=1
 pkgdesc="dwm - dynamic window manager"
 url="https://dwm.suckless.org"
@@ -35,6 +35,6 @@ package() {
 }
 
 sha512sums="
-285bf5e7f419b7bd6d7cd23548a5cb3dce84879b7e841ed3eb08c226f28c8782e37bce2bc481b2e90c4f2160f79d239476d56f01985af0d38a39fb9dce43dede  dwm-6.3.tar.gz
-e9acf8ae9b14ba2cf60f306423ab0cea4811319e9434cf4d493c2ea203c98226294dfddb96a944d542636d36c3cc75e9902cc9b069c87485b5742273cc1e8849  config.h
+b13ac4390c7945cfb4e06bbec2cf69a9bf55867fe2babcba1a4945803a12bea88db31ad06dd06627445f8456950deb26f2d631f946c4207ae92e13f273051a51  dwm-6.4.tar.gz
+23d59e1f3ba083c381fed711bc8bfa2653d162aa4e3961f2cc764278432377bdb2098ab3a23047457fc32a4bd2944a591e8ca219fb64c48585bd34a598f9b00f  config.h
 "
